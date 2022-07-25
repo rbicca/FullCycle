@@ -1,4 +1,4 @@
-# argument for old and small Go version
+# Argument for old and small Go version
 ARG GO_VERSION=1.15.6
  
 # STAGE 1: building the executable
@@ -8,9 +8,13 @@ WORKDIR /src
 
 COPY ./ ./
 
-# Build the executable
-RUN CGO_ENABLED=0 go build \
-    -installsuffix 'static' \
+ENV CGO_ENABLED=0
+ENV GOOS=linux
+
+# Build the executable - flags to remove the debug info
+RUN go build \
+    -ldflags='-s -w' \
+    -a -installsuffix cgo \
     -o /app ./
  
 # STAGE 2: build the container to run
