@@ -10,7 +10,7 @@ const config = {
 const mysql = require('mysql');
 const cn = mysql.createConnection(config);
 
-const sql = `insert into people(name) values ('Darth Maul has been here!')`;
+const sql = `insert into people(name) values ('Kuka o grande')`;
 cn.query(sql);
 //cn.end();
 
